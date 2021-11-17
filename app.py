@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, Playlist, Song, PlaylistSong
@@ -67,6 +67,7 @@ def add_playlist():
         playlist=Playlist(name=name, description=description)
         db.session.add(playlist)
         db.session.commit()
+        
         return redirect('/playlists')
     return render_template('new_playlist.html',form=form)
 
@@ -111,6 +112,7 @@ def add_song():
 
         db.session.add(new_song)
         db.session.commit()
+        
         return redirect('/songs')
     return render_template('new_song.html',form=form)
     
